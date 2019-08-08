@@ -10,3 +10,5 @@ mongoose.connect(process.env.DATABASE_URI, {
 
 /* importar los modelos */
 require('../models/User');
+require('../models/Category');
+require('../models/Group');

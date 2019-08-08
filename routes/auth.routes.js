@@ -5,6 +5,7 @@ const authController = require('../controllers/auth.controller');
 
 /* router */
 router.get('/login', authController.formLogin);
+router.post('/login', authController.login);
 
 router.get('/account-confirmation/:email', authController.accountConfirmation);
 

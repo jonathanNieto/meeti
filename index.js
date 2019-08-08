@@ -12,6 +12,7 @@ require('dotenv').config({ path: 'variables.env' });
 /* Initializations */
 require('./config/config');
 require('./config/database');
+const passport = require('./config/passport');
 const app = express();
 
 /* settings */
@@ -40,6 +41,10 @@ app.use(session({
     resave: true,
     saveUninitialized: true,
 }));
+
+/* inicializar passport */
+app.use(passport.initialize());
+app.use(passport.session());
 
 /* agrega flash messages */
 app.use(flash());

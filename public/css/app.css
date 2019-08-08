@@ -64,10 +64,10 @@ p {
 
 /** botones **/
 .btn {
-    padding: 1rem 4rem;
+    padding: 1rem 2.5rem;
     text-align: center;
     font-weight: 700;
-    font-size: 1.3rem;
+    font-size: 1rem;
     border: none;
     background-color: transparent;
     color:white;
@@ -93,19 +93,19 @@ p {
     background-color: #B8336A;
 }
 .btn-azul {
-    background-color: #068D9D;
+    background-color: #0062cc;
 }
 .btn-naranja {
     background-color: #E4572E;
 }
 .btn-verde {
-    background-color: #688E26;
+    background-color: #28a745;
 }
 .btn-azul2 {
-    background-color: #0F4C5C;
+    background-color: #068D9D;
 }
 .btn-rojo {
-    background-color: #92140C;
+    background-color: #dc3545;
 }
 
 /** Grid **/
@@ -378,6 +378,7 @@ main.contenedor-formularios {
 .default-form .campo input[type="date"],
 .default-form .campo input[type="time"],
 .default-form .campo input[type="number"],
+.default-form .campo input[type="file"],
 .default-form .campo textarea, 
 .default-form .campo select{
     margin: 0;
@@ -628,4 +629,62 @@ aside .ubicacion {
 }
 aside img {
     display: block;
+}
+
+/* jnd */
+.grid-container {
+    display: grid;
+    grid-gap: 25px;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-content: center;
+}
+
+@media (max-width: 767px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 700px) and (max-width: 1023px){
+    .grid-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.grid-item {
+    text-align: center;
+}
+
+.grid-item h4 {
+    font-size: 1.5rem;
+}
+
+.groups img {
+    width: 350px;
+    height: 180px;
+    border: 1px solid #484848;
+    border-radius: 5px;
+    padding: 5px;
+    opacity: 0.75;
+    cursor: pointer;
+}
+
+.groups img:hover {
+    border: 1px solid rgb(0, 0, 0);
+    opacity: 1;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .5);
+}
+
+.btns-sm {
+    padding: 1rem 0 0 0;
+}
+.btn-sm {
+    padding: .5rem .75rem;
+    text-align: center;
+    font-weight: 400;
+    font-size: 1.2rem;
+    border: none;
+    color:white;
+    display: inline-block;
+    border-radius: 5px;
 }

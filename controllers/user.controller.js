@@ -1,6 +1,7 @@
 const { validationResult } = require('express-validator');
 const handlerEmail = require('../handler/emails');
 const User = require('../models/User');
+const Group = require('../models/Group');
 
 module.exports = {
     formCreateAccount: (req, res) => {
@@ -13,15 +14,12 @@ module.exports = {
         const user = User(body);
 
         const expressErrors = validationResult(req);
-        console.log('*****************************')
-        console.log(expressErrors.errors);
         if (!expressErrors.isEmpty()) {
             expressErrors.errors.map(err => req.flash('error', err.msg));
-            /* res.redirect('/user/create-account'); */
         }
         try {
             await user.save();
-            
+
             const url = `http://${req.headers.host}/account-confirmation/${user.email}`;
 
             /* enviar email de confirmación */
@@ -35,18 +33,24 @@ module.exports = {
             req.flash('exito', `Hemos senviado un email   "${user.email}",   verifica tu cuenta`);
             res.redirect('/login');
         } catch (error) {
-            let errors;
             if (error.errors) {
-                errors = Object.values(error.errors).map(err => {
+                Object.values(error.errors).map(err => {
                     req.flash('error', err.message);
                     return err.message;
                 });
             } else {
-                errors = [error];
                 req.flash('error', error);
             }
 
             res.redirect('/user/create-account');
         }
-    }
+    },
+
+    userAdmin: async (req, res) => {
+        const groups = await Group.find();
+        res.render('user_admin', {
+            pagename: 'Administra tu cuenta',
+            groups
+        });
+    },
 }

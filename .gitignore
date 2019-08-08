@@ -3,3 +3,15 @@ node_modules
 
 #variables
 variables.env
+
+# exclude everything
+public/uploads/groups/*
+
+# exception to the rule
+!public/uploads/groups/.gitkeep 
+
+# exclude everything
+#public/uploads/*
+
+# exception to the rule
+#!public/uploads/.gitkeep 
