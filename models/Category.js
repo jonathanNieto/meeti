@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 
 const categorySchema = new Schema({
     name: { type: String, required: [true, 'Nombre es requerido'], trim: true },
+    slug: { type: String, trim: true },
 });
 
 module.exports = mongoose.model('Category', categorySchema);

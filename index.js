@@ -55,6 +55,7 @@ app.use((req, res, next) => {
     res.locals.messages = require('express-messages')(req, res);
     const date = new Date();
     res.locals.year = date.getFullYear();
+    res.locals.user = { ...req.user } || null;
     next();
 });
 

@@ -8,7 +8,7 @@ passport.use(new LocalStrategy({
 },
     async (email, password, next) => {
         /* este código se ejecuta al llenar el formulario */
-        const user = await User.findOne({ email: email, enabled:true });
+        const user = await User.findOne({ email: email, enabled: true });
 
         if (!user) {
             return next(null, false, {
@@ -22,7 +22,7 @@ passport.use(new LocalStrategy({
                 message: 'Credenciales incorrectas'
             });
         }
-    /* todo ok */
+        /* todo ok */
         return next(null, user);
     }
 ));

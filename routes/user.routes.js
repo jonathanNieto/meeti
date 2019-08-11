@@ -6,6 +6,7 @@ const { check, sanitizeBody } = require('express-validator');
 const userController = require('../controllers/user.controller');
 const authController = require('../controllers/auth.controller');
 const groupController = require('../controllers/group.controller');
+const meetiController = require('../controllers/meeti.controller');
 
 /* router */
 router.get('/create-account', userController.formCreateAccount);
@@ -47,5 +48,53 @@ router.post('/image-group/:id',
 
 /* delete group */
 router.delete('/delete-group/:id', authController.isAuthenticated, groupController.delete_group_delete);
+
+/* new meeti's */
+router.get('/new-meeti', authController.isAuthenticated, meetiController.create_meeti_get);
+router.post('/new-meeti',
+    [
+        sanitizeBody('name'),
+        sanitizeBody('guest'),
+        sanitizeBody('quota'),
+        sanitizeBody('date'),
+        sanitizeBody('address'),
+        sanitizeBody('city'),
+        sanitizeBody('state'),
+        sanitizeBody('country'),
+        sanitizeBody('description'),
+        sanitizeBody('location'),
+        sanitizeBody('attendees'),
+        sanitizeBody('user'),
+        sanitizeBody('group'),
+        sanitizeBody('slug')
+    ],
+    authController.isAuthenticated,
+    meetiController.create_meeti_post
+);
+
+router.get('/edit-meeti/:id', authController.isAuthenticated, meetiController.edit_meeti_get);
+router.post('/edit-meeti/:id',
+    [
+        sanitizeBody('name'),
+        sanitizeBody('guest'),
+        sanitizeBody('quota'),
+        sanitizeBody('date'),
+        sanitizeBody('address'),
+        sanitizeBody('city'),
+        sanitizeBody('state'),
+        sanitizeBody('country'),
+        sanitizeBody('description'),
+        sanitizeBody('location'),
+        sanitizeBody('attendees'),
+        sanitizeBody('user'),
+        sanitizeBody('group'),
+        sanitizeBody('slug')
+    ],
+    authController.isAuthenticated,
+    meetiController.edit_meeti_post
+);
+
+/* delete meeti */
+router.delete('/delete-meeti/:id', authController.isAuthenticated, meetiController.delete_meeti_delete);
 
 module.exports = router;

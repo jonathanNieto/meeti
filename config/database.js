@@ -12,3 +12,4 @@ mongoose.connect(process.env.DATABASE_URI, {
 require('../models/User');
 require('../models/Category');
 require('../models/Group');
+require('../models/Meeti');

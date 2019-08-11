@@ -2,6 +2,9 @@ const { validationResult } = require('express-validator');
 const handlerEmail = require('../handler/emails');
 const User = require('../models/User');
 const Group = require('../models/Group');
+const Meeti = require('../models/Meeti');
+const moment = require('moment');
+
 
 module.exports = {
     formCreateAccount: (req, res) => {
@@ -16,6 +19,7 @@ module.exports = {
         const expressErrors = validationResult(req);
         if (!expressErrors.isEmpty()) {
             expressErrors.errors.map(err => req.flash('error', err.msg));
+            return res.redirect('/user/create-account');
         }
         try {
             await user.save();
@@ -47,10 +51,32 @@ module.exports = {
     },
 
     userAdmin: async (req, res) => {
-        const groups = await Group.find();
+        /* cuando tenemos multiples consultas y son independientes entre ellas, lo mejos es usar un Promise.all() */
+        const queries = [];
+        queries.push(Group.find({ user: req.user._id }));
+        queries.push(Meeti.find({
+            user: req.user._id,
+            date: { $gte: new Date() }
+        }).sort({ date: 1}));
+        queries.push(Meeti.find({
+            user: req.user._id,
+            date: { $lt: new Date() }
+        }).sort({ date: -1}));
+
+        /* array destructuring; promise all con await */
+        const [groups, meetis, oldMeetis] = await Promise.all(queries);
+
+        /**
+         * Esto es el equivalente a lo anterior 
+         * const groups = await Group.find({user: req.user._id});
+         * const meetis = await Meeti.find({user: req.user._id}); 
+         * */
         res.render('user_admin', {
             pagename: 'Administra tu cuenta',
-            groups
+            groups,
+            meetis,
+            oldMeetis,
+            moment
         });
     },
 }
