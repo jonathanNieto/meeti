@@ -111,12 +111,10 @@ module.exports = {
             const meeti = await Meeti.findOneAndDelete({ _id, user: req.user._id });
 
             if (!meeti) {
-                req.flash('error', 'No se pudó realizar la tarea solicitada');
                 res.status(403).send('No se pudó realizar la tarea solicitada!');
                 return next();
             }
 
-            req.flash('exito', `El meeti "${meeti.name}" ha sido eliminado correctamente`);
             res.status(200).send(`El meeti "${meeti.name}" ha sido eliminado correctamente`);
         } catch (error) {
             console.log({ error })

@@ -192,9 +192,7 @@ module.exports = {
             const group = await Group.findOneAndDelete({ _id, user: req.user._id });
 
             if (!group) {
-                req.flash('error', 'No se pudó realizar la tarea solicitada');
                 res.status(403).send('No se pudó realizar la tarea solicitada!');
-                /* res.redirect('/user/admin'); */
                 return next();
             }
 
@@ -206,9 +204,11 @@ module.exports = {
                     }
                 });
             }
-            req.flash('exito', `El grupo "${group.name}" ha sido eliminado correctamente`);
+            /**
+             * SI ELIMINAMOS CON AXIOS, NO DEBEMOS MANDAR MENSAJES CON req.flash, YA QUE ESTOS SE
+             * VERAN EN LA PROXIMA VISTA QUE NO TIENE NADA QUE VER 
+             * req.flash('exito', `El grupo "${group.name}" ha sido eliminado correctamente`); */
             res.status(200).send('Grupo eliminado correctamente!');
-            /* return res.redirect('/user/admin'); */
         } catch (error) {
             console.log({ error })
         }
