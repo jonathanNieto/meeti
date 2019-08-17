@@ -38,13 +38,10 @@ userSchema.post('save', async function (err, doc, next) {
 
 /* autenticar usuarios */
 userSchema.methods.comparePassword = async function (password) {
-    console.log({ password })
-    console.log(this.password);
     return bcrypt.compareSync(password, this.password);
 }
 
 userSchema.methods.encryptPassword = async function (password) {
-    console.log({password})
     return await bcrypt.hash(password, 10);
 }
 

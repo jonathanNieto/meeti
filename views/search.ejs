@@ -1,0 +1,13 @@
+<div class="contenedor">
+    <h1><%= pagename %></h1>
+    <% if (meetis.length > 0 ) { %>
+    <div class="grid columnas-md-3 ">
+        <% moment.locale('es-us'); %>
+        <% meetis.forEach(meeti => { %>
+        <%- include partials/card_meeti.ejs %>
+        <% }) %>
+    </div>
+    <% } else { %>
+    <p>No hay resultados!</p>
+    <% } %>
+</div>

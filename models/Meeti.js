@@ -18,9 +18,9 @@ const meetiSchema = new Schema({
     country: { type: String, required: [true, 'El país es requerido'], trim: true },
     location: {
         type: { type: String, default: 'Point', trim: true },
-        coordinates: { type: [Number], required: true }
+        coordinates: [{ type: Number, required: true }]
     },
-    attendees: { type: [Schema.Types.ObjectId], ref: 'User' },
+    attendees: [{ type: Schema.Types.ObjectId, ref: 'User' }],
     user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     group: { type: Schema.Types.ObjectId, ref: 'Group', required: true },
     slug: String
@@ -29,7 +29,9 @@ const meetiSchema = new Schema({
 /* general una url */ /* el callback no funciona con un arrow function, esto es porque se pierde el scope de this */
 meetiSchema.pre('save', async function (next) {
     const url = slug(this.name).toLowerCase();
-    this.slug = `${url}-${shortid.generate()}`;
+    if (!this.slug) {
+        this.slug = `${url}-${shortid.generate()}`;
+    }
     next();
 });
 

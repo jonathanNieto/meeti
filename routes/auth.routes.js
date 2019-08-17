@@ -23,8 +23,6 @@ router.post('/change-password', [
     check('passwordnew', 'La contraseña nueva no puede ser igual a la actual')
         .exists()
         .custom((value, { req }) => {
-            console.log({value})
-            console.log(req.body.password)
             return value !== req.body.password;
         }),
     check('passwordnew', 'Debes escribir una nueva contraseña').not().isEmpty(),

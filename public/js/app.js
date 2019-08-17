@@ -1,6 +1,7 @@
-import meeti_groups from './meeti_groups';
-import mapas from './mapas';
 import assistance from './assistance';
+import meeti_groups from './meeti_groups';
+import deleteComment from './deleteComment';
+import mapas from './mapas';
 
 
 

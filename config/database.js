@@ -13,3 +13,4 @@ require('../models/User');
 require('../models/Category');
 require('../models/Group');
 require('../models/Meeti');
+require('../models/Comment');

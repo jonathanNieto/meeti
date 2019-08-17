@@ -104,8 +104,6 @@ module.exports = {
         /* promise con await */
         const [group, categories] = await Promise.all(queries);
 
-        console.log({ group })
-
         res.render('edit_group', {
             pagename: `Editar grupo: ${group.name}`,
             group,

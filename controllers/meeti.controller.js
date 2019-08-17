@@ -19,14 +19,13 @@ module.exports = {
             const date = new Date(`${body.date} ${body.hora}`);
             const location = {
                 type: 'Point',
-                coordinates: [parseFloat(body.lat), parseFloat(body.lng)]
+                coordinates: [parseFloat(body.lng), parseFloat(body.lat)]
             };
 
             meeti.date = date;
             meeti.location = location;
             meeti.user = req.user._id;
 
-            console.log({ meeti })
             await meeti.save();
             req.flash('exito', 'Se ha creado el Meeti Correctamente');
             res.redirect('/user/admin');
@@ -74,7 +73,7 @@ module.exports = {
             const date = new Date(`${body.date} ${body.hora}`);
             const location = {
                 type: 'Point',
-                coordinates: [parseFloat(body.lat), parseFloat(body.lng)]
+                coordinates: [parseFloat(body.lng), parseFloat(body.lat)]
             };
 
             if (!meeti) {

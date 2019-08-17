@@ -105,8 +105,6 @@ const buscarDireccion = function (e) {
 }
 
 const llenarDireccion = function (result) {
-    console.log(result)
-
     document.querySelector('#direccion').value = result.address.LongLabel || '';
     document.querySelector('#ciudad').value = result.address.City || '';
     document.querySelector('#estado').value = result.address.Region || '';

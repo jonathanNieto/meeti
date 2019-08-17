@@ -141,16 +141,13 @@ module.exports = {
                 return next();
             }
 
-            console.log('todo bien')
             const expressErrors = validationResult(req);
             if (!expressErrors.isEmpty()) {
                 expressErrors.errors.map(err => req.flash('error', err.msg));
                 return res.redirect('/change-password');
             }
 
-            console.log({ user })
             user.password = await user.encryptPassword(body.passwordnew);
-            console.log({ user })
             await user.save();
             req.logout();
             req.flash('exito', 'La contraseña se ha actualizado correctamente, vuelve a iniciar sesión');

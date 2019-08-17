@@ -3,6 +3,9 @@ import Swal from 'sweetalert2';
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    
+
+
     const groupList = document.querySelector('.groups');
     const meetiList = document.querySelector('.meetis');
     const oldMeetiList = document.querySelector('.oldmeetis');
@@ -33,7 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         axios.delete(url, { params: url })
                             .then(function (response) {
-                                console.log({ response })
                                 if (response.status === 200) {
 
                                     Swal.fire(
@@ -92,7 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         axios.delete(url, { params: url })
                             .then(function (response) {
-                                console.log({ response })
                                 if (response.status === 200) {
 
                                     Swal.fire(
@@ -126,9 +127,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const gridContainer = e.target.parentElement.parentElement.parentElement;
             const gridItem = e.target.parentElement.parentElement;
 
-            console.log(gridContainer)
-            console.log(gridItem)
-
             /* en caso de hacer click en el boton de eliminar */
             if (e.target.dataset.delete) {
                 /* eliminamos el grupo de la DB con axios */
@@ -149,7 +147,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         axios.delete(url, { params: url })
                             .then(function (response) {
-                                console.log({ response })
                                 if (response.status === 200) {
 
                                     Swal.fire(
